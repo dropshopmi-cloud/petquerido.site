@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
+            background: #fdf9f9;
             margin: 0;
             padding: 0;
             line-height: 1.6;
@@ -16,11 +16,11 @@
 
         .container {
             max-width: 800px;
-            margin: auto;
-            padding: 20px;
+            margin: 0 auto;
+            padding: 20px 20px 40px 20px;
         }
 
-        /* HEADER AGORA DENTRO DO CONTAINER */
+        /* HEADER */
         header {
             background: #d60000;
             color: #fff;
@@ -53,21 +53,30 @@
             font-size: 14px;
             opacity: 0.7;
             margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .creditos-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .cta {
-    display: inline-block;      /* Não ocupa 100% da largura */
-    text-align: center;
-    background: #028b08;
-    color: #fff;
-    padding: 12px 25px;         /* Ajuste o tamanho vertical/horizontal */
-    font-size: 18px;            /* Menor que antes */
-    border-radius: 6px;
-    margin: 30px auto;          /* Centraliza o botão */
-    font-weight: bold;
-    text-decoration: none;
-}
-
+            display: inline-block;
+            text-align: center;
+            background: #028b08;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 6px;
+            margin: 30px auto;
+            font-weight: bold;
+            text-decoration: none;
+        }
 
         .cta:hover {
             background: #1b5e20;
@@ -88,174 +97,162 @@
             border-radius: 4px;
         }
 
-        /* RODAPÉ AGORA DENTRO DO CONTAINER */
+        /* RODAPÉ ALINHADO AO CONTEÚDO */
         footer {
-            margin-top: 60px;
+            margin-top: 40px;
         }
 
         .footer-bar {
+            max-width: 800px;
+            margin: 0 auto 0 auto;
             background: #d60000;
-            width: 100%;
-            padding: 35px 25px;
-            text-align: center;
+            padding: 24px 20px;
             color: #fff;
             font-size: 15px;
             font-weight: 300;
             line-height: 1.6;
             border-radius: 4px;
+            text-align: left; /* acompanha alinhamento do texto do site */
         }
 
-        .footer-links {
-            margin-top: 15px;
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .footer-links a {
-            color: #fff;
-            text-decoration: underline;
-            margin: 0 8px;
-            opacity: 0.9;
+        .footer-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
         }
 
         .footer-disclaimer {
-            margin-top: 20px;
+            margin-top: 5px;
             font-size: 13px;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .copy {
-            margin-top: 15px;
+            margin-top: 12px;
             font-size: 14px;
-            opacity: 0.85;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 26px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            p {
+                font-size: 16px;
+            }
+            .cta {
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- HEADER DENTRO DO CONTAINER -->
-    <header>
-        Redação Viva
-    </header>
+        <!-- HEADER -->
+        <header>
+            Redação Viva
+        </header>
 
-    <h1>
-        Ex-cuidadora de idosos revela método simples que acabou com a constipação de centenas de pessoas
-    </h1>
+        <h1>
+            Ex-cuidadora de idosos revela método simples que acabou com a constipação de centenas de pessoas
+        </h1>
 
-    <!-- Créditos com imagem circular -->
-<p class="creditos">
-    <img src="images/redação.png" alt="Foto Redação" class="creditos-img">
-    Por Redação Viva — Atualizado há 12 minutos
-</p>
+        <!-- Créditos com imagem circular -->
+        <p class="creditos">
+            <img src="images/redação.png" alt="Foto Redação" class="creditos-img">
+            Por Redação Viva — Atualizado há 12 minutos
+        </p>
 
-<style>
-.creditos {
-    font-size: 14px;
-    opacity: 0.7;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espaço entre imagem e texto */
-}
+        <!-- IMAGEM ACIMA DO PARÁGRAFO -->
+        <img src="images/intest.jpg" alt="Imagem sobre constipação" class="top-image">
 
-.creditos-img {
-    width: 40px;       /* Tamanho da imagem */
-    height: 40px;      /* Tamanho da imagem */
-    border-radius: 50%; /* Torna circular */
-    object-fit: cover;  /* Mantém proporção e recorta */
-}
-</style>
+        <p>
+            A constipação intestinal tem se tornado um problema cada vez mais comum no Brasil. Milhões de pessoas convivem com
+            inchaço, dores abdominais, dificuldade para evacuar e uma sensação constante de desconforto que pode durar anos.
+        </p>
 
+        <p>
+            Embora muitos acreditem que a constipação seja apenas resultado da alimentação, estudos mostram que fatores como
+            estresse, rotina sedentária, baixa ingestão de água e o uso frequente de laxantes podem agravar significativamente
+            o problema.
+        </p>
 
-    <!-- IMAGEM ACIMA DO PARÁGRAFO -->
-    <img src="images/intest.jpg" alt="Imagem sobre constipação" class="top-image">
+        <div class="box">
+            <strong>"Eu não aguentava mais ver eles sofrerem."</strong><br>
+            — Helena Duarte, ex-cuidadora e criadora do Método Sem Constipação.
+        </div>
 
-    <p>
-        A constipação intestinal tem se tornado um problema cada vez mais comum no Brasil. Milhões de pessoas convivem com
-        inchaço, dores abdominais, dificuldade para evacuar e uma sensação constante de desconforto que pode durar anos.
-    </p>
+        <h2>A história de Helena</h2>
 
-    <p>
-        Embora muitos acreditem que a constipação seja apenas resultado da alimentação, estudos mostram que fatores como
-        estresse, rotina sedentária, baixa ingestão de água e o uso frequente de laxantes podem agravar significativamente
-        o problema.
-    </p>
+        <p>
+            Trabalhando por 12 anos em um lar de idosos em Minas Gerais, Helena presenciou diariamente o sofrimento causado
+            pela prisão de ventre severa. Idosos passavam até quatro dias sem conseguir evacuar, dependiam de laxantes fortes
+            e viviam com dores constantes.
+        </p>
 
-    <div class="box">
-        <strong>"Eu não aguentava mais ver eles sofrerem."</strong><br>
-        — Helena Duarte, ex-cuidadora e criadora do Método Sem Constipação.
+        <p>
+            Determinada a mudar essa realidade, Helena passou meses estudando hábitos matinais, alimentos específicos, rotinas
+            corporais e técnicas usadas em centros geriátricos no exterior. Com isso, desenvolveu um protocolo simples que começou
+            a aplicar nos idosos do asilo.
+        </p>
+
+        <div style="text-align:center;">
+            <a class="cta" href="https://receitasdestravei.site/eu-quero/">QUERO ACESSAR O MÉTODO SEM CONSTIPAÇÃO</a>
+        </div>
+
+        <h2>Resultados surpreendentes</h2>
+
+        <p>Em poucos dias, Helena observou mudanças significativas:</p>
+
+        <ul>
+            <li>Evacuação mais regular e sem dor</li>
+            <li>Menos inchaço e desconforto abdominal</li>
+            <li>Diminuição do uso de laxantes</li>
+            <li>Melhora no humor e bem-estar geral</li>
+        </ul>
+
+        <p>
+            A notícia se espalhou e logo adultos de todas as idades começaram a pedir ajuda. Foi então que Helena decidiu
+            reunir todo seu conhecimento no ebook <strong>Método Sem Constipação</strong>, um guia prático e acessível.
+        </p>
+
+        <!-- IMAGEM ACIMA DO PARÁGRAFO -->
+        <img src="images/constipaçao-mulher.png" alt="Imagem sobre constipação" class="top-image">
+
+        <h2>O que você encontra no Método Sem Constipação</h2>
+
+        <ul>
+            <li>Rotina matinal que ativa o intestino naturalmente</li>
+            <li>Sequência de movimentos simples para estimular o peristaltismo</li>
+            <li>Combinações alimentares que reduzem o inchaço</li>
+            <li>Principais erros que travam o intestino</li>
+            <li>Plano de 7 dias para regularizar o intestino</li>
+        </ul>
+
+        <div style="text-align:center;">
+            <a class="cta" href="https://receitasdestravei.site/eu-quero/">QUERO ACESSAR O MÉTODO SEM CONSTIPAÇÃO</a>
+        </div>
+
+        <p>
+            O conteúdo foi escrito em linguagem simples e pensado para qualquer pessoa desde jovens até idosos que deseja
+            acabar com a constipação de forma natural e sem remédios agressivos.
+        </p>
+
     </div>
 
-    <h2>A história de Helena</h2>
-
-    <p>
-        Trabalhando por 12 anos em um lar de idosos em Minas Gerais, Helena presenciou diariamente o sofrimento causado
-        pela prisão de ventre severa. Idosos passavam até quatro dias sem conseguir evacuar, dependiam de laxantes fortes
-        e viviam com dores constantes.
-    </p>
-
-    <p>
-        Determinada a mudar essa realidade, Helena passou meses estudando hábitos matinais, alimentos específicos, rotinas
-        corporais e técnicas usadas em centros geriátricos no exterior. Com isso, desenvolveu um protocolo simples que começou
-        a aplicar nos idosos do asilo.
-    </p>
-
-    <div style="text-align:center;">
-    <a class="cta" href="https://receitasdestravei.site/eu-quero/">QUERO ACESSAR O MÉTODO SEM CONSTIPAÇÃO</a>
-</div>
-
-
-    <h2>Resultados surpreendentes</h2>
-
-    <p>Em poucos dias, Helena observou mudanças significativas:</p>
-
-    <ul>
-        <li>Evacuação mais regular e sem dor</li>
-        <li>Menos inchaço e desconforto abdominal</li>
-        <li>Diminuição do uso de laxantes</li>
-        <li>Melhora no humor e bem-estar geral</li>
-    </ul>
-
-    <p>
-        A notícia se espalhou e logo adultos de todas as idades começaram a pedir ajuda. Foi então que Helena decidiu
-        reunir todo seu conhecimento no ebook <strong>Método Sem Constipação</strong>, um guia prático e acessível.
-    </p>
-
-    <!-- IMAGEM ACIMA DO PARÁGRAFO -->
-    <img src="images/constipaçao-mulher.png" alt="Imagem sobre constipação" class="top-image">
-
-    <h2>O que você encontra no Método Sem Constipação</h2>
-
-    <ul>
-        <li>Rotina matinal que ativa o intestino naturalmente</li>
-        <li>Sequência de movimentos simples para estimular o peristaltismo</li>
-        <li>Combinações alimentares que reduzem o inchaço</li>
-        <li>Principais erros que travam o intestino</li>
-        <li>Plano de 7 dias para regularizar o intestino</li>
-    </ul>
-
-    <div style="text-align:center;">
-    <a class="cta" href="https://receitasdestravei.site/eu-quero/">QUERO ACESSAR O MÉTODO SEM CONSTIPAÇÃO</a>
-</div>
-
-
-    <p>
-        O conteúdo foi escrito em linguagem simples e pensado para qualquer pessoa desde jovens até idosos que deseja
-        acabar com a constipação de forma natural e sem remédios agressivos.
-    </p>
-
-
-    <!-- RODAPÉ DENTRO DO CONTAINER -->
+    <!-- RODAPÉ ALINHADO AO CONTEÚDO -->
     <footer>
         <div class="footer-bar">
-            Redação Viva  
-
-           
+            <div class="footer-title">Redação Viva</div>
 
             <div class="footer-disclaimer">
-                Este site possui caráter informativo e não substitui consultas médicas.  
+                Este site possui caráter informativo e não substitui consultas médicas.
                 Os resultados podem variar de pessoa para pessoa.
             </div>
 
@@ -264,8 +261,6 @@
             </div>
         </div>
     </footer>
-
-</div>
 
 </body>
 </html>
