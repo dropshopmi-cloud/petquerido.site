@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMEIXA</title>
+
+<link rel="icon" type="image/svg+xml" href="">        
+<link rel="alternate icon" href="images/favicon.ico">                        
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#f2c200">   
+<meta name="theme-color" content="#f2c200" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#ffffff; 
+      --ink:#470244;
+    }
+    body{ font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); }
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: #000;
+}
+
+#player,
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.video-preview.hidden {
+    display: none;
+}
+
+.video-blocker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 5;
+    display: none;
+    cursor: default;
+}
+
+.video-blocker.active {
+    display: block;
+    pointer-events: auto;
+}
+
+#video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+#video-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-content {
+    background-color: rgba(204, 0, 0, 0.9);
+    padding: 15px 25px;
+    border-radius: 10px;
+    max-width: 300px;
+    width: 85%;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: pulse 3s infinite;
+}
+
+.video-text-top {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+}
+
+.video-text-bottom {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 15px 0 0 0;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7)); }
+    70% { transform: scale(1.1); filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7)); }
+}
+
+.play-icon-container {
+    animation: pulse 3s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .video-container { aspect-ratio: 9 / 16; max-width: 100%; }
+    .video-text-top { font-size: 1.3rem; }
+    .video-text-bottom { font-size: 0.9rem; }
+    .overlay-content { padding: 15px 20px; }
+    .play-icon-container svg { width: 50px; height: 50px; }
+}
+  </style>
+</head>
+<body class="bg-white">
+ 
+  <header class="border-b">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center gap-3">          
+      <div class="ml-2 flex items-center gap-2 md:gap-3 leading-none text-[18px] sm:text-[22px] md:text-[26px]">
+        <footer style="text-align: center; font-family: serif; color: #ffffff;">
+          <p style="margin: 0; font-size: 1.2em;"></p>
+        </footer>
+      </div>
+    </div>
+    <div class="h-1" style="background:var(--brand)"></div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4">
+    <div class="h-6"></div>
+    <div class="text-center mb-14">
+        <h1 class="text-3xl sm:text-4xl leading-tight font-extrabold tracking-tight text-gray-900">
+            Cansada de sentir o <span class="text-red-600">intestino preso</span> e aquele inchaço abdominal constante?
+        </h1>
+    </div>
+
+    <div class="video-container">
+        <img id="video-preview" class="video-preview" src="images/Captura de tela 2025-12-20 014216.png" alt="Preview do vídeo">
+        <div id="player"></div>
+        <div id="video-blocker" class="video-blocker"></div>
+        <div id="video-overlay">
+            <div class="overlay-content">
+                <p class="video-text-top">Seu vídeo já começou</p>
+                <div class="play-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="70px" height="70px">
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    </svg>
+                </div>
+                <p class="video-text-bottom">Toque para ouvir</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="elementoOculto" data-show-delay="2983" style="display: none">
+        <div class="w-full p-10 bg-white">
+          <a href="https://pay.kiwify.com.br/XS8SRHM?afid=kQgjJzN4" class="block w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 px-6 rounded-lg text-center leading-tight shadow-md">
+            Desconto Aplicado! Quero o Ameixa App agora
+          </a>
+        </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-gray-100 text-gray-200 text-sm leading-relaxed mt-10">
+    <div class="max-w-5xl mx-auto px-4 py-10 space-y-6">
+      <div class="space-y-4 text-justify text-gray-400 text-xs">
+        <p>Este site não possui qualquer vínculo com o Facebook ou a Meta LLC. Ele não é patrocinado, endossado ou administrado por essas empresas. "Facebook" é uma marca registrada pertencente à Meta LLC.</p>
+        <p>A reprodução, distribuição ou modificação, total ou parcial, deste site e de seu conteúdo é estritamente proibida. Todo o material aqui disponível está protegido por leis de direitos autorais e de propriedade intelectual vigentes em todos os países.</p>
+        <p>O autor reserva-se o direito de adotar medidas legais em caso de uso indevido ou não autorizado. Todo o cuidado foi tomado para apresentar as informações deste programa de forma precisa, porém não há garantias de que os resultados obtidos serão iguais ou que a abundância mencionada será alcançada.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+// Carregamento Seguro da API do YouTube
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player;
+var playerReady = false;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        videoId: '5_a_7ILGTps',
+        playerVars: {
+            'autoplay': 1,
+            'mute': 1,
+            'controls': 0,
+            'showinfo': 0,
+            'rel': 0,
+            'modestbranding': 1,
+            'playsinline': 1,
+            'fs': 0,
+            'iv_load_policy': 3,
+            'enablejsapi': 1
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    playerReady = true;
+    event.target.mute();
+    event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+        document.getElementById('video-blocker').classList.add('active');
+        checkVideoTimeForElement();
+    }
+    // Garante que o vídeo não pare se o usuário tentar pausar clicando fora do blocker
+    if (event.data === YT.PlayerState.PAUSED) {
+        player.playVideo();
+    }
+}
+
+function checkVideoTimeForElement() {
+    const elementoOculto = document.getElementById('elementoOculto');
+    if (!elementoOculto) return;
+    const SECONDS_TO_DISPLAY = parseInt(elementoOculto.getAttribute('data-show-delay')) || 0;
+    
+    const checkInterval = setInterval(() => {
+        if (player && player.getCurrentTime) {
+            if (player.getCurrentTime() >= SECONDS_TO_DISPLAY) {
+                elementoOculto.style.display = "block";
+                clearInterval(checkInterval);
+            }
+        }
+    }, 1000);
+}
+
+function startVideo() {
+    if (playerReady && player) {
+        document.getElementById('video-preview').classList.add('hidden');
+        document.getElementById('video-overlay').classList.add('hidden');
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+    }
+}
+
+// Eventos de clique/toque na capa
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('video-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', startVideo);
+        overlay.addEventListener('touchend', function(e) {
+            startVideo();
+        });
+    }
+});
+</script>
+
+</body>
+</html>
